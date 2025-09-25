@@ -37,8 +37,9 @@ Pickle (model persistence)
 
 ⚡ Installation
 1️⃣ Clone Repository
-git clone https://github.com/your-username/spam-detection.git
-cd spam-detection
+git clone (https://github.com/asilzain02/Spam-Email-Detection-Flask-Machine-Learning-.git)
+
+cd Spam-Email-Detection-Flask-Machine-Learning-
 
 2️⃣ Create Virtual Environment (Optional but Recommended)
 python -m venv venv
