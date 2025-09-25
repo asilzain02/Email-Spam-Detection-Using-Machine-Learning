@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Spam Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Email Spam Detection</h1>
+    <form id="spam-form">
+        <label for="email-text">Enter your email content:</label>
+        <textarea id="email-text" rows="30" placeholder="Type the email content here..."></textarea>
+        <button type="submit">Check for Spam</button>
+    </form>
+    <div class="result" id="result"></div>
+
+    <script>
+        // Handle form submission
+        document.getElementById('spam-form').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            // Get the email content from the textarea
+            const emailContent = document.getElementById('email-text').value;
+
+            // Send the email content to the backend for prediction
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: emailContent })
+            });
+
+            // Get the result and display it
+            const data = await response.json();
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = `Prediction: ${data.result}`;
+        });
+    </script>
+</body>
+</html>
